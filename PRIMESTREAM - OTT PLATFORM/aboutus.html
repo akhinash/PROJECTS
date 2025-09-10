@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - PrimeStream</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #e50914;
+            --dark-color: #141414;
+            --light-color: #f4f4f4;
+            --secondary-color: #6e6e6e;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #000;
+            color: var(--light-color);
+        }
+
+        .navbar {
+            background-color: var(--dark-color) !important;
+            padding: 1rem 2rem;
+        }
+
+        .navbar-brand {
+            color: var(--primary-color) !important;
+            font-weight: 700;
+            font-size: 2rem;
+        }
+
+        .section-title {
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        footer {
+            background-color: var(--dark-color);
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-links {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--light-color);
+        }
+
+        .navbar-nav .nav-link {
+            position: relative;
+        }
+
+        .navbar-nav .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ff4c4c;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="project2.html">PRIMESTREAM</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="project2.html">Home</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Us Section -->
+    <div class="container mt-5">
+        <h2 class="section-title">About Us</h2>
+        <p>Welcome to PrimeStream, your number one source for all things streaming. We're dedicated to providing you the
+            very best of entertainment, with an emphasis on reliability, customer service, and uniqueness.</p>
+
+        <h3 class="section-title mt-4">Our Mission</h3>
+        <p>To deliver high-quality streaming services that bring joy and entertainment to our users, making it easy for
+            everyone to access their favorite shows and movies.</p>
+
+        <h3 class="section-title mt-4">Our Vision</h3>
+        <p>To be the leading streaming platform that connects people through the power of storytelling and
+            entertainment, fostering a community of passionate viewers.</p>
+
+        <h3 class="section-title mt-4">Our Values</h3>
+        <ul>
+            <li><i class="fas fa-check"></i> Customer-Centric: We prioritize our users' needs and preferences.</li>
+            <li><i class="fas fa-check"></i> Innovation: We continuously strive to improve and innovate our services.
+            </li>
+            <li><i class="fas fa-check"></i> Integrity: We operate with honesty and transparency in all our dealings.
+            </li>
+            <li><i class="fas fa-check"></i> Community: We believe in building a strong community of viewers and
+                creators.</li>
+        </ul>
+
+        <h3 class="section-title mt-4">Our History</h3>
+        <p>Founded in 2025, PrimeStream started as a small project with a vision to revolutionize the way people consume
+            entertainment. Over the time, we have grown into a trusted platform with millions of subscribers worldwide.
+        </p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="text-center text-secondary mt-4">
+                <p>&copy; 2025 PrimeStream. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

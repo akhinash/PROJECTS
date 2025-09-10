@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeStream - Premium Streaming Platform</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #e50914;
+            --dark-color: #141414;
+            --light-color: #f4f4f4;
+            --secondary-color: #6e6e6e;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #000;
+            color: var(--light-color);
+        }
+
+        .navbar {
+            background-color: var(--dark-color) !important;
+            padding: 1rem 2rem;
+        }
+
+        .navbar-brand {
+            color: var(--primary-color) !important;
+            font-weight: 700;
+            font-size: 2rem;
+        }
+
+        .nav-link {
+            color: var(--light-color) !important;
+        }
+
+        .hero {
+            position: relative;
+            height: 75vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 0 4rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 10;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+            background-image: url('https://i.pinimg.com/1200x/49/d6/8f/49d68fc983b66770f629ff9dad146d04.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-outline-light:hover {
+            color: var(--dark-color) !important;
+        }
+
+        .section-title {
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .movie-card {
+            background: var(--dark-color);
+            border-radius: 5px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            margin-bottom: 1rem;
+        }
+
+        .movie-card:hover {
+            transform: scale(1.05);
+            z-index: 1;
+        }
+
+        .movie-poster {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .movie-info {
+            padding: 1rem;
+        }
+
+        .movie-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .movie-meta {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .badge-genre {
+            background-color: var(--primary-color);
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .search-box {
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--secondary-color);
+            color: white;
+        }
+
+        .search-box::placeholder {
+            color: var(--secondary-color);
+        }
+
+        .filter-section {
+            background-color: var(--dark-color);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+        }
+
+        .dropdown-menu {
+            background-color: var(--dark-color);
+        }
+
+        .dropdown-item {
+            color: var(--light-color);
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--primary-color);
+        }
+
+        .subscription-card {
+            background-color: var(--dark-color);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s;
+        }
+
+        .subscription-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .subscription-title {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .subscription-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .feature-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-list li i {
+            color: var(--primary-color);
+            margin-right: 0.5rem;
+        }
+
+        footer {
+            background-color: var(--dark-color);
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-links {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--light-color);
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 5%;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 60vh;
+                padding: 0 1rem;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+        }
+
+        .navbar-nav .nav-link {
+            position: relative;
+        }
+
+        .navbar-nav .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ff4c4c;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="project2.html">PRIMESTREAM</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#moviesGrid">Movies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#featuredCarousel">Upcoming</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="aboutus.html">About Us</a>
+                    </li>
+                    
+                </ul>
+                <div class="d-flex">
+                    <div class="input-group me-2">
+                        <input type="text" class="form-control search-box" placeholder="Search..." id="navSearchInput">
+                       <button class="btn btn-outline-light" type="button" id="navSearchBtn"
+                            onclick="filterByNavSearch()">
+                             <a href="#moviesGrid"><i class="fas fa-search"></i></a>
+                        </button>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="profileDropdown"
+                        data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="form.html">Account</a></li>
+                        <li><a class="dropdown-item" href="cart3.html">Subscription</a></li>
+                        <li><a class="dropdown-item" href="help.html">Help Center</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="form.html">Sign In/Sign Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="display-4">Unlimited movies, TV shows, and more</h1>
+            <p class="lead">Watch anywhere. Cancel anytime.</p>
+            <p>Ready to watch? Enter your email to create or restart your membership.</p>
+            <div class="d-flex" >
+                <input type="email" class="form-control me-2" placeholder="Email address" id="emailInput">
+                <a href="form1.html"><button class="btn btn-primary" id="getStartedBtn" disabled>Get Started <i
+                            class="fas fa-chevron-right"></i></button></a>
+            </div>
+        </div>
+    </section>
+
+   
+
+   
+
+       
+         <!-- Main Content -->
+    <div class="container" >
+
+         <!-- Featured Content Carousel -->
+        <h2 class="section-title" >   Upcoming</h2>
+        <div id="featuredCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://i.pinimg.com/1200x/e1/a7/30/e1a730dac899f2775698bd4d512d2113.jpg" class="d-block w-100 h-80
+                        " alt="Blockbuster sci-fi movie poster with futuristic cityscape and neon lights">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://i.pinimg.com/1200x/bd/26/16/bd26168c4f474b86210733717636dffd.jpg"
+                        class="d-block w-100 h-80"
+                        alt="Romantic comedy movie poster showing couple in Paris with Eiffel Tower in background">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://i.pinimg.com/1200x/8b/0f/be/8b0fbe82c3f5bb73eca9f557e8a9879c.jpg"
+                        class="d-block w-100 h-80"
+                        alt="Action thriller poster with hero holding gun in dark alley with dramatic lighting">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        
+        <div><h2 id="categories2" >Categorize</h2></div>
+        <!-- Search and Filter Section -->
+        <div class="filter-section"  >
+            <div class="row">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <input type="text" class="form-control search-box" id="liveSearch"
+                        placeholder="Search movies and shows..." autocomplete="off">
+                </div>
+                <div class="col-md-2 mb-2 mb-md-0">
+                    <select class="form-select search-box" id="genreFilter">
+                        <option value="" selected>All Genres</option>
+                        <option value="action">Action</option>
+                        <option value="comedy">Comedy</option>
+                        <option value="drama">Drama</option>
+                        <option value="sci-fi">Sci-Fi</option>
+                        <option value="horror">Horror</option>
+                        <option value="romance">Romance</option>
+                        <option value="thriller">Thriller</option>
+                    </select>
+                </div>
+                <div class="col-md-2 mb-2 mb-md-0">
+                    <select class="form-select search-box" id="languageFilter">
+                        <option value="" selected>All Languages</option>
+                        <option value="english">English</option>
+                        <option value="hindi">Hindi</option>
+                        <option value="Malayalam">Malayalam</option>
+                        <option value="Tamil">Tamil</option>
+                        <option value="korean">korean</option>
+                        
+
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select search-box" id="subscriptionFilter">
+                        <option value="" selected>All Plans</option>
+                        <option value="basic">Basic</option>
+                        <option value="standard">Standard</option>
+                        <option value="premium">Premium</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Movies Grid -->
+        <h2 class="section-title" >Popular on PrimeStream</h2>
+        
+        <div class="row" id="moviesGrid">
+            <!-- Movies will be dynamically loaded here -->
+        </div>
+        <!-- Featured Content Carousel -->
+        <h2 class="section-title">Featured Today</h2>
+        <div id="featuredCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://i.pinimg.com/1200x/73/b8/aa/73b8aa2aeb62061bdcacde1d034eaee7.jpg"
+                        class="d-block w-100"
+                        alt="Blockbuster sci-fi movie poster with futuristic cityscape and neon lights">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://i.pinimg.com/1200x/7d/32/be/7d32bed6f3bd18c2680ca32fb89a3100.jpg"
+                        class="d-block w-100"
+                        alt="Romantic comedy movie poster showing couple in Paris with Eiffel Tower in background">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://i.pinimg.com/1200x/02/6c/dd/026cdd956b7caaffe8e23e2fc75f04dd.jpg"
+                        class="d-block w-100"
+                        alt="Action thriller poster with hero holding gun in dark alley with dramatic lighting">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+
+
+
+
+
+
+        <!-- Subscription Plans -->
+        <h2 class="section-title mt-5">Choose Your Plan</h2>
+        <div class="row" id="subscriptionPlans">
+            <div class="col-md-4">
+                <div class="subscription-card text-center">
+                    <h3 class="subscription-title">BASIC</h3>
+                    <h4 class="subscription-price">₹299<span class="fs-6">/month</span></h4>
+                    <ul class="feature-list text-start mt-4">
+                        <li><i class="fas fa-check"></i> HD available</li>
+                        <li><i class="fas fa-check"></i> Watch on 1 device at a time</li>
+                        <li><i class="fas fa-check"></i> Unlimited movies and TV shows</li>
+                        <li><i class="fas fa-check"></i> Cancel anytime</li>
+                    </ul>
+                    <a href="cart3.html"><button type="submit" class="btn btn-primary w-100 mt-3">Choose
+                            Plan</button></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="subscription-card text-center">
+                    <div class="position-relative">
+                        <span class="badge bg-primary position-absolute top-0 end-0">MOST POPULAR</span>
+                        <h3 class="subscription-title">STANDARD</h3>
+                        <h4 class="subscription-price">₹699<span class="fs-6">/month</span></h4>
+                    </div>
+                    <ul class="feature-list text-start mt-4">
+                        <li><i class="fas fa-check"></i> Full HD available</li>
+                        <li><i class="fas fa-check"></i> Watch on 2 devices at a time</li>
+                        <li><i class="fas fa-check"></i> Unlimited movies and TV shows</li>
+                        <li><i class="fas fa-check"></i> Download on 2 devices</li>
+                        <li><i class="fas fa-check"></i> Cancel anytime</li>
+                    </ul>
+                    <a href="cart3.html"><button type="submit" class="btn btn-primary w-100 mt-3">Choose
+                            Plan</button></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="subscription-card text-center">
+                    <h3 class="subscription-title">PREMIUM</h3>
+                    <h4 class="subscription-price">₹999<span class="fs-6">/month</span></h4>
+                    <ul class="feature-list text-start mt-4">
+                        <li><i class="fas fa-check"></i> Ultra HD available</li>
+                        <li><i class="fas fa-check"></i> Watch on 4 devices at a time</li>
+                        <li><i class="fas fa-check"></i> Unlimited movies and TV shows</li>
+                        <li><i class="fas fa-check"></i> Download on 6 devices</li>
+                        <li><i class="fas fa-check"></i> Dolby Atmos support</li>
+                        <li><i class="fas fa-check"></i> Cancel anytime</li>
+                    </ul>
+                    <a href="cart3.html"><button type="submit" class="btn btn-primary w-100 mt-3">Choose
+                            Plan</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <h5>PRIMESTREAM</h5>
+                    <p>The ultimate streaming experience for movie lovers.</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/" class="text-secondary me-2"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/" class="text-secondary me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/" class="text-secondary me-2"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/" class="text-secondary"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Company</h5>
+                    <ul class="footer-links">
+                        <li><a href="aboutus.html">About Us</a></li>
+                        <li><a href="career.html">Careers</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="terms.html">Terms of Use</a></li>
+                        <li><a href="terms.html">Privacy Policy</a></li>
+                        
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Browse</h5>
+                    <ul class="footer-links">
+                        
+                        <li><a href="#moviesGrid">Movies</a></li>
+                       
+                        <li><a href="#categories2">Categorize</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center text-secondary mt-4">
+                <p>&copy; 2025 PrimeStream. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="trailerModal" tabindex="-1" aria-labelledby="trailerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="trailerModalLabel" style="color: #000;">Movie Trailer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe id="trailerVideo" width="100%" height="400" src="" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Sample movie data
+        const movies = [
+            {
+                id: 1,
+                title: "The Dark Knight Rises",
+                genre: "action",
+                language: "english",
+                year: 2012,
+                rating: 8.4,
+                subscription: "premium",
+                poster: "https://i.pinimg.com/1200x/83/9a/04/839a046d5787aa573073ae170a07ed4a.jpg",
+                trailer: "https://youtu.be/z5Humz3ONgk?si=uWFjJFuXz-yVrk81"
+            },
+            {
+                id: 2,
+                title: "Inception",
+                genre: "sci-fi",
+                language: "english",
+                year: 2010,
+                rating: 8.8,
+                subscription: "premium",
+                poster: "https://i.pinimg.com/1200x/b0/ae/a4/b0aea49646879a043ad9f6ec3002e99f.jpg",
+                trailer: "https://youtu.be/8hP9D6kZseM?si=64HfnswSpsKR0gpR"
+            },
+            {
+                id: 3,
+                title: "Pulp Fiction",
+                genre: "drama",
+                language: "english",
+                year: 1994,
+                rating: 8.9,
+                subscription: "standard",
+                poster: "https://i.pinimg.com/736x/95/a6/cb/95a6cb9f0d695f54b295890f1e4efcaf.jpg",
+                trailer: "https://youtu.be/s7EdQ4FqbhY?si=0VBrO28ULsWj5lhM"
+            },
+            {
+                id: 4,
+                title: "The Shawshank Redemption",
+                genre: "drama",
+                language: "english",
+                year: 1994,
+                rating: 9.3,
+                subscription: "basic",
+                poster: "https://i.pinimg.com/736x/fa/cc/2d/facc2d4d6ab07064c1a3f736af5aded7.jpg",
+                trailer: "https://youtu.be/PLl99DlL6b4?si=dAEMfrYKYXvtYYIv"
+            },
+            {
+                id: 5,
+                title: "The Godfather",
+                genre: "drama",
+                language: "english",
+                year: 1972,
+                rating: 9.2,
+                subscription: "standard",
+                poster: "https://i.pinimg.com/736x/72/15/f4/7215f47daf9e647c03ce2edd3fb85d02.jpg",
+                trailer: "https://youtu.be/UaVTIH8mujA?si=633Oy1wjLzHTJlIA"
+            },
+            {
+                id: 6,
+                title: "Parasite",
+                genre: "drama",
+                language: "korean",
+                year: 2019,
+                rating: 8.6,
+                subscription: "standard",
+                poster: "https://i.pinimg.com/1200x/e6/de/03/e6de035cd3307b513e9bfe88a1457826.jpg",
+                trailer: "https://youtu.be/isOGD_7hNIY?si=TqAQoS9sqpC5OdZU"
+            },
+            {
+                id: 7,
+                title: "Avengers: Endgame",
+                genre: "action",
+                language: "english",
+                year: 2019,
+                rating: 8.4,
+                subscription: "premium",
+                poster: "https://i.pinimg.com/1200x/95/26/68/9526684fe11e38cf6bb6fbd48e37de6a.jpg",
+                trailer: "https://youtu.be/TcMBFSGVi1c?si=tEqsNB_tYlOIjuaj"
+            },
+            {
+                id: 8,
+                title: "3 Idiots",
+                genre: "comedy",
+                language: "hindi",
+                year: 2009,
+                rating: 8.4,
+                subscription: "basic",
+                poster: "https://i.pinimg.com/736x/ef/3a/5b/ef3a5bd1ebd0ed068f37da5de1146588.jpg",
+                trailer: "https://youtu.be/K0eDlFX9GMc?si=KVZMtDWFirGRQqNO"
+            },
+            {
+                id: 9,
+                title: "Devasuram",
+                genre: "action",
+                language: "Malayalam",
+                year: 1993,
+                rating: 9.2,
+                subscription: "basic",
+                poster: "https://i.pinimg.com/736x/ac/57/d9/ac57d9b1afff6b42f2d5e5991135c40c.jpg",
+                trailer: "https://youtu.be/lewSG62kpfs?si=60jy4AJ71I0XMEVS"
+            },
+            {
+                id: 10,
+                title: "F1",
+                genre: "sports",
+                language: "english",
+                year: 2025,
+                rating: 7.9,
+                subscription: "basic",
+                poster: "https://m.media-amazon.com/images/M/MV5BZTYwYjJhNzYtY2ZiZS00ZmYxLWJkZjctYjRlNGIxYjI3ZTU0XkEyXkFqcGc@._V1_FMjpg_UY3000_.jpg/300x450",
+                trailer: "https://youtu.be/8yh9BPUBbbQ?si=GJNmHSWTIzvQfALg"
+            },
+            {
+                id: 9,
+                title: "Vikramadithyan",
+                genre: "drama",
+                language: "Malayalam",
+                year: 2014,
+                rating: 7.1,
+                subscription: "premium",
+                poster: "https://i.pinimg.com/736x/86/72/24/867224b2247e3c47d4c46377d9626ffe.jpg",
+                trailer: "https://youtu.be/mUCWhRnBb7s?si=aJdwJkffLIbXOaf_"
+            },
+            {
+                id: 10,
+                title: "Mahaan",
+                genre: "action",
+                language: "Tamil",
+                year: 2022,
+                rating: 7.7,
+                subscription: "premium",
+                poster: "https://i.pinimg.com/736x/c6/97/59/c69759d80f7cb504157c3be4eb39570b.jpg",
+                trailer: "https://youtu.be/i4ORfM-q35Y?si=ySXhs7X8L-uYZi3E"
+            }
+
+
+
+        ];
+
+        // DOM Elements
+        const moviesGrid = document.getElementById('moviesGrid');
+        const searchInput = document.getElementById('liveSearch');
+        const genreFilter = document.getElementById('genreFilter');
+        const languageFilter = document.getElementById('languageFilter');
+        const subscriptionFilter = document.getElementById('subscriptionFilter');
+        const navSearchInput = document.getElementById('navSearchInput');
+        // Initial render
+        renderMovies(movies);
+
+        // Event listeners for filters
+        searchInput.addEventListener('input', filterMovies);
+        navSearchInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                filterByNavSearch();
+            }
+        });
+
+        genreFilter.addEventListener('change', filterMovies);
+        languageFilter.addEventListener('change', filterMovies);
+        subscriptionFilter.addEventListener('change', filterMovies);
+
+        // Function to render movies
+        function renderMovies(moviesToRender) {
+            moviesGrid.innerHTML = '';
+
+            moviesToRender.forEach(movie => {
+                const movieCard = document.createElement('div');
+                movieCard.className = 'col-6 col-md-4 col-lg-3';
+                movieCard.innerHTML = `
+                    <div class="movie-card">
+                        <img src="${movie.poster}" class="movie-poster" alt="${movie.title} movie poster">
+                        <div class="movie-info">
+                            <h5 class="movie-title">${movie.title}</h5>
+                            <div class="movie-meta">
+                                <span>${movie.year}</span> | 
+                                <span>${movie.rating}/10</span>
+                            </div>
+                            <div class="mt-2">
+                                <span class="badge badge-genre">${capitalizeFirstLetter(movie.genre)}</span>
+                                <span class="badge badge-secondary">${capitalizeFirstLetter(movie.language)}</span>
+                                <button class="btn btn-primary mt-2" onclick="openTrailer('${movie.trailer}')">Watch Trailer</button>
+                               <a href="cart3.html"> <button class="btn btn-primary w-100 mt-3">Play</button></a>
+                            
+                            </div>
+                        </div>
+                    </div>
+                `;
+                moviesGrid.appendChild(movieCard);
+            });
+        }
+        function openTrailer(trailerUrl) {
+            const trailerVideo = document.getElementById('trailerVideo');
+            const id = trailerUrl.split(/(youtu\.be\/|watch\?v=)/)[2];
+            trailerVideo.src = `https://www.youtube.com/embed/${id}`;
+            const modal = new bootstrap.Modal(document.getElementById('trailerModal'));
+            modal.show();
+        }
+
+        const emailInput = document.getElementById("emailInput");
+        const getStartedBtn = document.getElementById("getStartedBtn");
+
+        // Email validation regex
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // Check input on every keystroke
+        emailInput.addEventListener("input", function () {
+            if (emailRegex.test(emailInput.value.trim())) {
+                getStartedBtn.disabled = false;
+            } else {
+                getStartedBtn.disabled = true;
+            }
+        });
+
+        // Optional: button click action
+        getStartedBtn.addEventListener("click", function () {
+            alert("Email submitted: " + emailInput.value);
+        });
+
+
+
+
+
+
+
+        // Function to filter movies based on search and filters
+        function filterMovies() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedGenre = genreFilter.value;
+            const selectedLanguage = languageFilter.value;
+            const selectedSubscription = subscriptionFilter.value;
+
+            const filteredMovies = movies.filter(movie => {
+                const matchesSearch = movie.title.toLowerCase().includes(searchTerm);
+                const matchesGenre = selectedGenre === '' || movie.genre === selectedGenre;
+                const matchesLanguage = selectedLanguage === '' || movie.language === selectedLanguage;
+                const matchesSubscription = selectedSubscription === '' || movie.subscription === selectedSubscription;
+
+                return matchesSearch && matchesGenre && matchesLanguage && matchesSubscription;
+            });
+
+            renderMovies(filteredMovies);
+        }
+        function filterByNavSearch() {
+            searchInput.value = navSearchInput.value;
+            filterMovies();
+        }
+
+        // Helper function to capitalize first letter
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+    </script>
+</body>
+
+</html>

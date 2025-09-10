@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - PrimeStream</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #e50914;
+            --dark-color: #141414;
+            --light-color: #f4f4f4;
+            --secondary-color: #6e6e6e;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #000;
+            color: var(--light-color);
+        }
+
+        .navbar {
+            background-color: var(--dark-color) !important;
+            padding: 1rem 2rem;
+        }
+
+        .navbar-brand {
+            color: var(--primary-color) !important;
+            font-weight: 700;
+            font-size: 2rem;
+        }
+
+        .section-title {
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .subscription-card {
+            background-color: var(--dark-color);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .subscription-title {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .subscription-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        footer {
+            background-color: var(--dark-color);
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-links {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--light-color);
+        }
+
+        .navbar-nav .nav-link {
+            position: relative;
+        }
+
+        .navbar-nav .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ff4c4c;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="project2.html">PRIMESTREAM</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="project2.html">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="aboutus.html">About Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="section-title">Choose Your Plan</h2>
+        <div class="row" id="subscriptionPlans">
+            <div class="col-md-4">
+                <div class="subscription-card text-center">
+                    <h3 class="subscription-title">BASIC</h3>
+                    <h4 class="subscription-price">₹299<span class="fs-6">/month</span></h4>
+                    <ul class="feature-list text-start mt-4">
+                        <li><i class="fas fa-check"></i> HD available</li>
+                        <li><i class="fas fa-check"></i> Watch on 1 device at a time</li>
+                        <li><i class="fas fa-check"></i> Unlimited movies and TV shows</li>
+                        <li><i class="fas fa-check"></i> Cancel anytime</li>
+                    </ul>
+                    <a href="#cart"> <button class="btn btn-primary w-100 mt-3"
+                            onclick="selectPlan('BASIC', 299)">Choose Plan</button></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="subscription-card text-center">
+                    <div class="position-relative">
+                        <span class="badge bg-primary position-absolute top-0 end-0">MOST POPULAR</span>
+                        <h3 class="subscription-title">STANDARD</h3>
+                        <h4 class="subscription-price">₹699<span class="fs-6">/month</span></h4>
+                    </div>
+                    <ul class="feature-list text-start mt-4">
+                        <li><i class="fas fa-check"></i> Full HD available</li>
+                        <li><i class="fas fa-check"></i> Watch on 2 devices at a time</li>
+                        <li><i class="fas fa-check"></i> Unlimited movies and TV shows</li>
+                        <li><i class="fas fa-check"></i> Download on 2 devices</li>
+                        <li><i class="fas fa-check"></i> Cancel anytime</li>
+                    </ul>
+                    <a href="#cart"> <button class="btn btn-primary w-100 mt-3"
+                            onclick="selectPlan('STANDARD', 699)">Choose Plan</button></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="subscription-card text-center">
+                    <h3 class="subscription-title">PREMIUM</h3>
+                    <h4 class="subscription-price">₹999<span class="fs-6">/month</span></h4>
+                    <ul class="feature-list text-start mt-4">
+                        <li><i class="fas fa-check"></i> Ultra HD available</li>
+                        <li><i class="fas fa-check"></i> Watch on 4 devices at a time</li>
+                        <li><i class="fas fa-check"></i> Unlimited movies and TV shows</li>
+                        <li><i class="fas fa-check"></i> Download on 6 devices</li>
+                        <li><i class="fas fa-check"></i> Dolby Atmos support</li>
+                        <li><i class="fas fa-check"></i> Cancel anytime</li>
+                    </ul>
+                    <a href="#cart"> <button class="btn btn-primary w-100 mt-3"
+                            onclick="selectPlan('PREMIUM', 999)">Choose Plan</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Section -->
+    <div class="container mt-5" id="cart">
+        <h2 class="section-title">Your Cart</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="subscription-card text-center">
+                    <h3 class="subscription-title">Selected Plan: <span id="selectedPlan">Choose your plan</span></h3>
+                    <h4 class="subscription-price" id="totalPrice">₹0<span class="fs-6">/month</span></h4>
+                    <ul class="feature-list text-start mt-4"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <h4 class="text-light">Total: <span id="totalPriceDisplay">SELECT YOUR PLAN</span></h4>
+            <button class="btn btn-primary mt-3" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="checkoutModalLabel" style="color: black;">Checkout Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="color: black;">
+                    Proceeding to checkout with the <span id="modalPlan"></span> plan at <span
+                        id="modalPrice"></span>/month...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="confirmCheckout()">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="text-center text-secondary mt-4">
+                <p>&copy; 2023 PrimeStream. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        let currentPlan = 'NO';
+        let currentPrice = 0;
+
+        function selectPlan(plan, price) {
+            currentPlan = plan;
+            currentPrice = price;
+            document.getElementById('selectedPlan').innerText = currentPlan;
+            document.getElementById('totalPrice').innerHTML = `₹${currentPrice}<span class="fs-6">/month</span>`;
+            document.getElementById('totalPriceDisplay').innerText = `₹${currentPrice}/month`;
+        }
+
+        function checkout() {
+            document.getElementById('modalPlan').innerText = currentPlan;
+            document.getElementById('modalPrice').innerText = `₹${currentPrice}`;
+            var myModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
+            myModal.show();
+        }
+
+        function confirmCheckout() {
+            alert(`Checkout confirmed for the ${currentPlan} plan at ₹${currentPrice}/month.`);
+            // Here you can add the logic to handle the actual checkout process
+        }
+    </script>
+</body>
+
+</html>
